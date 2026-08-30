@@ -4,8 +4,9 @@ def test_signup_for_activity_succeeds(client):
     email = "newstudent@mergington.edu"
 
     # Act
-    response = client.post(f"/activities/{activity}/signup?email={email}")
+    from urllib.parse import quote
 
+    response = client.post(f"/activities/{quote(activity)}/signup?email={quote(email)}")
     # Assert
     assert response.status_code == 200
     assert response.json()["message"] == f"Signed up {email} for {activity}"
